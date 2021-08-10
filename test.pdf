@@ -1,0 +1,116 @@
+%PDF-1.3
+%·¾­ª
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [ 4 0 R ]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Producer (Haru Free PDF Library 2.3.0RC2)
+>>
+endobj
+4 0 obj
+<<
+/Type /Page
+/MediaBox [ 0 0 595 841 ]
+/Contents 5 0 R
+/Resources <<
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+/Font <<
+/F1 7 0 R
+/F2 8 0 R
+/F3 9 0 R
+>>
+>>
+/Parent 2 0 R
+>>
+endobj
+5 0 obj
+<<
+/Length 6 0 R
+>>
+stream
+/F1 24 Tf
+BT
+50 791 Td
+(test output) Tj
+ET
+/F2 12 Tf
+BT
+50 765 Td
+(the quick brown fox jumps over the lazy whatever) Tj
+ET
+/F2 12 Tf
+BT
+50 751 Td
+ET
+/F2 12 Tf
+BT
+50 737 Td
+(end of sample text) Tj
+ET
+/F3 12 Tf
+BT
+50 723 Td
+(or is it?) Tj
+ET
+
+endstream
+endobj
+6 0 obj
+240
+endobj
+7 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Bold
+/Subtype /Type1
+/Encoding /StandardEncoding
+>>
+endobj
+8 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Roman
+/Subtype /Type1
+/Encoding /StandardEncoding
+>>
+endobj
+9 0 obj
+<<
+/Type /Font
+/BaseFont /Times-Italic
+/Subtype /Type1
+/Encoding /StandardEncoding
+>>
+endobj
+xref
+0 10
+0000000000 65535 f
+0000000015 00000 n
+0000000064 00000 n
+0000000123 00000 n
+0000000187 00000 n
+0000000383 00000 n
+0000000677 00000 n
+0000000696 00000 n
+0000000795 00000 n
+0000000895 00000 n
+trailer
+<<
+/Root 1 0 R
+/Info 3 0 R
+/Size 10
+>>
+startxref
+996
+%%EOF

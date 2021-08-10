@@ -2,7 +2,7 @@
 
 int main() {
 	EbookTesting e;
-	e.test_fileHandler();
+	e.test_writePDF("test.txt");
 
 	return 0;
 }

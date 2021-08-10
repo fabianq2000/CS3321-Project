@@ -4,7 +4,7 @@
 
 #include  "FileHandler.h""
 
-std::vector<std::string> FileHandler::loadFile(std::string& filename) {
+std::vector<std::string> FileHandler::loadFile(const std::string& filename) {
 	std::ifstream inFile;
 	std::vector<std::string> contents;
 	std::string line;

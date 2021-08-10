@@ -1,0 +1,5 @@
+bs24 1 test output
+s12 2 the quick brown fox jumps over the lazy whatever
+ 3 
+ 4 end of sample text
+i 5 or is it?

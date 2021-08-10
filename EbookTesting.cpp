@@ -56,4 +56,12 @@ public:
 		}
 
 	}
+	void test_writePDF(const std::string & filename) {
+		DocumentConverter dc;
+		FileHandler fh;
+		std::vector<std::string> content = fh.loadFile(filename);
+
+		dc.writeOutputContent(content, "test.pdf");
+
+	}
 };
