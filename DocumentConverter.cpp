@@ -85,7 +85,7 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
     height = HPDF_Page_GetHeight(page);
     width = HPDF_Page_GetWidth(page);
 
-    width = mariginw;
+    width =     mariginw;
     height = height - mariginh;
 
     for (int x = 0; x < outputContent.size(); x++) {
@@ -120,8 +120,8 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
         font_index += bold + 2 * italics;
         def_font = HPDF_GetFont(pdf, font_list[font_index], NULL);
 
-        printLine(text, def_font, font_size, page, width, height);
         height = height - font_size - 2;
+        printLine(text, def_font, font_size, page, width, height);
         
     }
 

@@ -1,6 +1,6 @@
 #include "Editor.h"
 #include "DocumentConverter.h"
-#include "Filehandler.h"
+#include "eBook.h"
 
 #include <string>
 #include <vector>
@@ -14,54 +14,50 @@ private:
 		}
 	}
 public:
-	// FileHandler testing
 
-	void test_fileHandler() {
-		int counter;
-		std::vector<std::string> data;
-		data.push_back("line 1");
-		data.push_back("line 2");
-		data.push_back("line 3");
+	void testEbook() {
+		std::string name = "Test ebook name";
+		std::string owner = "Test ebook owner";
+		std::string description = "This is a test ebook";
+		std::vector<std::string> content;
+		content.push_back("bs24 1 This is line 1 of the test ebook");
+		content.push_back("s18 2 This is line 2 of the test ebook");
+		content.push_back("s18 3 This is line 3 of the test ebook");
+		content.push_back(" 4 ");
+		content.push_back("s18 5 There should be an empty line above this one");
+		content.push_back("bs24 6 Bold font and larger");
+		content.push_back("is12 7 Italic font and larger");
+		content.push_back("bis48 8 Very large bold italic");
 
-		FileHandler fh;
-
-		std::string filename;
+		eBook myBook(name, owner, description, false);
+		myBook.updateContent(content);
 		
-		for (counter = 0; counter < 4; counter++) {
-			filename = "testfile" + std::to_string(counter + 1) + ".txt";
-			fh.saveToFile(filename, data);
+		std::cout << "Filename: " << myBook.getFilename() << std::endl;
+		std::cout << "Owner: " << myBook.getOwner() << std::endl;
+		std::cout << "Description: " << myBook.getDescription() << std::endl;
+		
+		std::vector<std::string> myContent = myBook.getContent();
+		std::cout << "Content: " << std::endl;
+		for (int x = 0; x < myContent.size(); x++) {
+			std::cout << myContent.at(x) << std::endl;
 		}
+		std::cout << std::endl;
 
-		for (counter = 0; counter < 4; counter++) {
-			data.empty();
-			filename = "testfile" + std::to_string(counter + 1) + ".txt";
-			std::cout << filename << std::endl;
-			data = fh.loadFile(filename);
-			printVector(data);
-			std::cout << std::endl;
+		std::cout << "attempting to write to " << myBook.getFilename() << std::endl;
+		myBook.writeEbook();
+		myBook.publish();
+
+		eBook myBook2(myBook.getFilename());
+		std::cout << "Filename: " << myBook2.getFilename() << std::endl;
+		std::cout << "Owner: " << myBook2.getOwner() << std::endl;
+		std::cout << "Description: " << myBook2.getDescription() << std::endl;
+
+		myContent = myBook2.getContent();
+		std::cout << "Content: " << std::endl;
+		for (int x = 0; x < myContent.size(); x++) {
+			std::cout << myContent.at(x) << std::endl;
 		}
-
-		for (counter = 0; counter < 2; counter++) {
-			filename = "testfile" + std::to_string(counter + 1) + ".txt";
-			std::string val = "appended";
-			fh.appendFile(filename, val);
-		}
-		for (counter = 0; counter < 2; counter++) {
-			data.empty();
-			filename = "testfile" + std::to_string(counter + 1) + ".txt";
-			std::cout << filename << std::endl;
-			data = fh.loadFile(filename);
-			printVector(data);
-			std::cout << std::endl;
-		}
-
-	}
-	void test_writePDF(const std::string & filename) {
-		DocumentConverter dc;
-		FileHandler fh;
-		std::vector<std::string> content = fh.loadFile(filename);
-
-		dc.writeOutputContent(content, "test.pdf");
+		std::cout << std::endl;
 
 	}
 };
