@@ -16,6 +16,7 @@ void registerMenu();
 void loginAttempt();
 void loggedInMenu(LoginUser* loggedInUser);
 void modifyMenu(LoginUser* loggedInUser);
+void publishMenu(LoginUser* loggedInUser);
 
 
 
@@ -90,18 +91,19 @@ void loggedInMenu(LoginUser* loggedInUser) {
 	Editor e;
 	eBook myBook;
 	cout << "Welcome back " << endl;
-	while (choice != '4') {
-		cout << "Choose one of the options below: " << endl;
+	while (choice != '5') {
+		cout << "Choose one of the choices below:" << endl;
 		cout << "--------------------------------" << endl;
 		cout << "1.See personal info" << endl;
 		cout << "2.Create new eBook" << endl;
-		cout << "3.Modify existing eBook" << endl;
-		cout << "4.Exit" << endl;
+		cout << "3.Load eBook" << endl;
+		cout << "4.Publish eBook" << endl;
+		cout << "5.Exit" << endl;
 		cin >> choice;
 		cout << endl;
 
 
-		while (choice < '1' || choice > '4')
+		while (choice < '1' || choice > '5')
 		{
 			cout << "Option not available. Please try again" << endl << endl;
 			cout << "Choose one of the choices below:" << endl;
@@ -109,7 +111,8 @@ void loggedInMenu(LoginUser* loggedInUser) {
 			cout << "1.See personal info" << endl;
 			cout << "2.Create new eBook" << endl;
 			cout << "3.Load eBook" << endl;
-			cout << "4.Exit" << endl;
+			cout << "4.Publish eBook" << endl;
+			cout << "5.Exit" << endl;
 			cin >> choice;
 			cout << endl;
 
@@ -128,6 +131,9 @@ void loggedInMenu(LoginUser* loggedInUser) {
 		case '3':
 			modifyMenu(loggedInUser);
 			break;
+		case '4':
+			publishMenu(loggedInUser);
+			break;
 		}
 	}
 }
@@ -141,17 +147,17 @@ void modifyMenu(LoginUser* loggedInUser) {
 		cout << "No eBooks found. Please create a new eBook." << endl;;
 	}
 	else {
-		cout << "Choose which eBook to edit: " << endl;
+		cout << "Choose which eBook to edit (0 to go back): " << endl;
 		for (int x = 0; x < IDs.size() && IDs.at(x) > 0; x++) {
 			options[x] = IDs.at(x);
 			cout << x + 1 << ". " << fh.getFileNameOfID(IDs.at(x)) << endl;
 		}
 		cin >> choice;
 		cout << endl;
-		while (choice < '1' || choice > '0' + IDs.size()
+		while (choice < '0' || choice > '0' + IDs.size()
 			) {
-			cout << "Invalid choice. Please choose an option from the menu. " << endl;
-			cout << "Choose which eBook to edit: " << endl;
+			cout << "Invalid choice. Please choose an option from the menu or enter 0 to go back. " << endl;
+			cout << "Choose which eBook to edit (0 to go back): " << endl;
 			for (int x = 0; x < IDs.size() && IDs.at(x) > 0; x++) {
 				options[x] = IDs.at(x);
 				cout << x + 1 << ". " << fh.getFileNameOfID(IDs.at(x)) << endl;
@@ -159,10 +165,49 @@ void modifyMenu(LoginUser* loggedInUser) {
 			cin >> choice;
 			cout << endl;
 		}
-		eBook mybook(fh.getFileNameOfID(options[choice - '0' - 1]));
-		Editor e;
-		cin.ignore();
-		e.initializeEditor(mybook);
+		if (choice > '0') {
+
+			eBook mybook(fh.getFileNameOfID(options[choice - '0' - 1]));
+			Editor e;
+			cin.ignore();
+			e.initializeEditor(mybook);
+		}
 	}
 
+}
+
+void publishMenu(LoginUser* loggedInUser) {
+	char choice = ' ';
+	vector<int> IDs;
+	int options[MAX_EBOOKS_PER_USER];
+	IDs = loggedInUser->getIDs();
+	if (IDs.size() == 0) {
+		cout << "No eBooks found. Please create a new eBook." << endl;;
+	}
+	else {
+		cout << "Choose which eBook to publish (0 to go back): " << endl;
+		for (int x = 0; x < IDs.size() && IDs.at(x) > 0; x++) {
+			options[x] = IDs.at(x);
+			cout << x + 1 << ". " << fh.getFileNameOfID(IDs.at(x)) << endl;
+		}
+		cin >> choice;
+		cout << endl;
+		while (choice < '0' || choice > '0' + IDs.size()) {
+			cout << "Invalid choice. Please choose an option from the menu or enter 0 to go back. " << endl;
+			cout << "Choose which eBook to publish (0 to go back): " << endl;
+			for (int x = 0; x < IDs.size() && IDs.at(x) > 0; x++) {
+				options[x] = IDs.at(x);
+				cout << x + 1 << ". " << fh.getFileNameOfID(IDs.at(x)) << endl;
+			}
+			cin >> choice;
+			cout << endl;
+		}
+		if (choice > '0') {
+			eBook mybook(fh.getFileNameOfID(options[choice - '0' - 1]));
+			Editor e;
+			cin.ignore();
+			mybook.publish();
+			cout << "eBook > " << mybook.getName() << " < published as .pdf" << endl;
+		}
+	}
 }

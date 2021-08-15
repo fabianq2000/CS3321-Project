@@ -35,6 +35,7 @@ public:
 	std::string getOwner();
 	std::string getDescription();
 	std::string getFilename();
+	std::string getName();
 	void writeEbook();
 	void deleteEbook();
 	void setPublic();

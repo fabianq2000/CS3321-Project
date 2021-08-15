@@ -117,7 +117,9 @@ std::string eBook::getDescription() {
 std::string eBook::getFilename() {
 	return filename;
 }
-
+std::string eBook::getName() {
+	return name;
+}
 // End attibute retrieval methods
 
 

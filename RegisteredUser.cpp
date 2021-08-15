@@ -57,31 +57,25 @@ LoginUser* RegisteredUser::authenticate(const std::string &un, const std::string
 					email = users.at(x + 4).substr(7);
 					IDstring = users.at(x + 5).substr(11);
 					if (IDstring != "") {
-						//cout << "A  " << IDstring << endl;
 
 						pos = IDstring.find(' ');
 						s = IDstring.substr(0, pos);
 						s2 = IDstring.substr(pos + 1);
-						std::cout << "A  " << s << " : " << s2 << endl;
 						id = stoi(s);
 						for (int x = 0; x < MAX_EBOOKS_PER_USER && id > 0; x++) {
 
 							IDs.push_back(id);
 							total++;
 							id = 0;
-							//cout << "A  " << x <<": " << IDs[x]  << " : " << id << endl;
 							pos = s2.find(' ');
 							if (pos != std::string::npos) {
 								s = s2.substr(0, pos);
 								s2 = s2.substr(pos + 1);
 								if (s2.length() == 0) {
-									std::cout << "s2 empty" << endl;
 								}
-								std::cout << "A  " << s << " : " << s2 << endl;
 								id = stoi(s);
 							}
 							else {
-								std::cout << "didnt find delim\t" << id << endl;
 							}
 						}
 					}

@@ -212,11 +212,7 @@ eBook LoginUser::createNewEbook() {
 }
 
 void LoginUser::addEbookByID(const int& ID) {
-	int index = 0;
-	while (ebookIDs[index] > 0) {
-		index++;
-	}
-	ebookIDs[index] = ID;
+	ebookIDs.push_back(ID);
 }
 
 void LoginUser::printOwnedEbooks() {
