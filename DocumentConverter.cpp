@@ -45,6 +45,7 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
     HPDF_Doc  pdf;
     char fname[256];
     HPDF_Page page, page2;
+    HPDF_Page lastpage;
     HPDF_Font def_font;
     HPDF_REAL tw;
     HPDF_REAL height;
@@ -81,9 +82,10 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
 
     /* Add a new page object. */
     page = HPDF_AddPage(pdf);
+    lastpage = page;
 
-    height = HPDF_Page_GetHeight(page);
-    width = HPDF_Page_GetWidth(page);
+    height = HPDF_Page_GetHeight(lastpage);
+    width = HPDF_Page_GetWidth(lastpage);
 
     width =     mariginw;
     height = height - mariginh;
@@ -118,7 +120,16 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
         def_font = HPDF_GetFont(pdf, font_list[font_index], NULL);
 
         height = height - font_size - 2;
-        printLine(text, def_font, font_size, page, width, height);
+        if (height < font_size + mariginh) {
+            page = HPDF_AddPage(pdf);
+            lastpage = page;
+            height = HPDF_Page_GetHeight(lastpage);
+            width = HPDF_Page_GetWidth(lastpage);
+
+            width = mariginw;
+            height = height - mariginh;
+        }
+        printLine(text, def_font, font_size, lastpage, width, height);
         
     }
 

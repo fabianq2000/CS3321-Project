@@ -1,14 +1,7 @@
-Username: BigDogg
-Password: goku
-First Name: fabian
-Last Name: quijano
-Email: gf
+Username: rastley
+Password: asda
+First Name: Rick
+Last Name: Astley
+Email: rastley420@gmail.com
+eBook IDs: 1 
 ----------
-
-Username: SG713
-Password: CS
-First Name: Sergio
-Last Name: Gab
-Email: gggg
-----------
-
