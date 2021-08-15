@@ -1,3 +1,6 @@
+#pragma once
+#include <vector>
+
 class FileHandler {
 public:
 	std::vector<std::string> loadFile(const std::string& filename);

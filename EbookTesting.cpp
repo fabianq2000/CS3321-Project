@@ -60,4 +60,10 @@ public:
 		std::cout << std::endl;
 
 	}
+
+	void testEditor() {
+		eBook testBook("1_Test ebook name.txt");
+		Editor e;
+		e.initializeEditor(testBook);
+	}
 };

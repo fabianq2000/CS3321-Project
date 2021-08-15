@@ -62,7 +62,7 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
     int font_size = 12;
 
     std::string line;
-    std::string formatting, line_num, text;
+    std::string formatting, text;
 
     size_t pos = 0;
 
@@ -96,9 +96,6 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
         line = outputContent.at(x);
         pos = line.find(" ");
         formatting = line.substr(0, pos);
-        line = line.substr(pos + 1);
-        pos = line.find(" ");
-        line_num = line.substr(0, pos);
         text = line.substr(pos + 1);
         if (formatting.find("b") != std::string::npos) {
             bold = true;
@@ -111,7 +108,7 @@ void DocumentConverter::writeOutputContent(std::vector<std::string> outputConten
             line.clear();
             for (int y = pos; y < formatting.length(); y++) {
                 char c = formatting.at(y);
-                if (c >= 48 && c <= 57) {
+                if (c >= '0' && c <= '9') {
                     line.push_back(c);
                 }
             }

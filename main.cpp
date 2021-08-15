@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 	EbookTesting e;
-	e.testEbook();
+	e.testEditor();
 
 	return 0;
 }
