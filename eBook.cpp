@@ -6,7 +6,9 @@
 
 // Delimiter for metadata in the .txt file that stores eBook contents
 const char DELIM = '|';
+eBook::eBook() {
 
+}
 // Filename constructor
 // Loads all appropriate information from the file
 eBook::eBook(const std::string & fn) {
@@ -159,3 +161,9 @@ void eBook::publish() {
 	std::string fn = filename.substr(0, filename.length() - 4) + ".pdf";
 	dc.writeOutputContent(content, fn);
 }
+
+// Uncomment this stub instead
+
+/*void eBook::publish() {
+
+}*/

@@ -109,6 +109,37 @@ int FileHandler::getLastIndex() {
 	return lastIndex;
 }
 
+std::string FileHandler::getFileNameOfID(const int& ID) {
+	std::string fn;
+	std::string strindex;
+	std::string path = ".";
+	int index;
+	bool isNumeric = true;
+	for (const auto& entry : fs::directory_iterator(path)) {
+		fn = entry.path().string();
+		if (fn.substr(fn.length() - 4) == ".txt") {
+			strindex = fn.substr(0, fn.find('_'));
+			strindex = strindex.substr(2);
+
+			// test if the filename substring is fully numeric
+			isNumeric = true;
+			for (int x = 0; x < strindex.length() && isNumeric; x++) {
+				if (isdigit(strindex.at(x)) == 0) {
+					isNumeric = false;
+				}
+			}
+			if (isNumeric) {
+				index = stoi(strindex);
+				if (index == ID) {
+					return fn;
+				}
+			}
+		}
+	}
+	return "";
+}
+
+
 int FileHandler::renameFile(const std::string& from, const std::string& to) {
 	char oldname[256];
 	char newname[256];

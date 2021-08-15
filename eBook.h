@@ -44,6 +44,9 @@ public:
 
 	// Default constructor
 	//============================
+	eBook();
+
+
 	eBook(const std::string & filename); 
 
 	// Constructor with parameters

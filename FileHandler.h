@@ -8,5 +8,6 @@ public:
 	void appendFile(const std::string& filename, const std::string& line);
 	int deleteFile(const std::string& filename);
 	int getLastIndex();
+	std::string getFileNameOfID(const int& ID);
 	int renameFile(const std::string& from, const std::string& to);
 };

@@ -17,10 +17,13 @@ void Editor::initializeEditor(eBook& book) {
 	std::string str;
 	std::string formatting;
 
+
 	// Extract the content from the eBook parameter
 	std::vector<std::string> content = book.getContent();
 
 	do {
+
+		std::system("cls");
 
 		//Display the eBook content NUM_LINES lines at a time, 
 		//starting at firstLineLoaded which is initialized to 0
@@ -101,7 +104,6 @@ void Editor::initializeEditor(eBook& book) {
 			std::cout << "eBook saved to " << book.getFilename() << std::endl;
 			system("pause");
 		}
-		system("cls");
 	} while (input != 8 && input !=9);
 
 }

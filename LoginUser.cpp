@@ -1,12 +1,18 @@
 #include "LoginUser.h"
 #include "RegisteredUser.h"
+#include "FileHandler.h"
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 using namespace std;
 
 static ifstream in;
 
+static FileHandler fh;
+static const std::string USERDB_FILENAME = "usersdb.txt";
+
+/*
 void LoginUser::setUserName()
 {
 	bool check = true;
@@ -39,6 +45,49 @@ void LoginUser::setUserName()
 		
 	}
 	in.close();
+}*/
+
+LoginUser::LoginUser() {
+	userName = "";
+}
+
+LoginUser::LoginUser(
+	const std::string& username,
+	const std::string& password,
+	const std::string& first,
+	const std::string& last,
+	const std::string& em,
+	vector<int> IDs
+) {
+	userName = username;
+	userPassword = password;
+	firstName = first;
+	lastName = last;
+	email = em;
+	ebookIDs = IDs;
+}
+
+void LoginUser::setUserName() {
+	std::vector<std::string> users = fh.loadFile(USERDB_FILENAME);\
+	cout << "Enter username: ";
+	getline(cin, userName);
+
+	bool invalidUserName ;
+
+	std::string line;
+	std::string line2;
+	do {
+		invalidUserName = false;
+		for (int x = 0; x < users.size(); x++) {
+			if (users.at(x).substr(0, 10) == "Username: ") {
+				if (users.at(x).substr(10, userName.length()) == userName) {
+					cout << "Username already exists" << endl;
+					cout << "Try a different username" << endl;
+					invalidUserName = true;
+				}
+			}
+		}
+	} while (invalidUserName);
 }
 //=======================================================
 void LoginUser::setUserPassword()
@@ -122,6 +171,9 @@ string LoginUser::getPasswordHash()
 	return passwordHash;
 }
 //========================================
+vector<int> LoginUser::getIDs() {
+	return ebookIDs;
+}
 void LoginUser::encryptPassword()
 {
 	
@@ -136,6 +188,39 @@ void LoginUser::encryptPassword()
 		c = (char)cval;
 		passwordHash += c;
 	}
+}
+void LoginUser::printInfo() {
+	cout << "Username: " << userName << endl;
+	cout << "Name: " << firstName + " " + lastName << endl;
+	cout << "Email: " << email << endl;
+}
+
+eBook LoginUser::createNewEbook() {
+	std::string name;
+	std::string description;
+	vector<int> IDs;
+	RegisteredUser info;
+	cout << "Name: ";
+	getline(cin, name);
+	cout << "Description: ";
+	getline(cin, description);
+	eBook book(name, userName, description, true);
+	addEbookByID(book.getID());
+	IDs = getIDs();
+	info.updateUser(getUserName(), getUserPassword(), getFirstName(), getLastName(), getEmail(), IDs);
+	return book;
+}
+
+void LoginUser::addEbookByID(const int& ID) {
+	int index = 0;
+	while (ebookIDs[index] > 0) {
+		index++;
+	}
+	ebookIDs[index] = ID;
+}
+
+void LoginUser::printOwnedEbooks() {
+
 }
 //===========================================================================
 /*bool LoginUser::authenticate()
